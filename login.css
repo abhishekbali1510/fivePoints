@@ -6,6 +6,7 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  padding: 5px;
   font-family: 'Roboto', sans-serif;
 }
 
@@ -104,6 +105,16 @@ body {
   font-size: 12px;
 }
 
-header {
+header{
+    font-size: 25px;
     float: right;
+}
+
+.customerInfo{
+  
+  font-size: 20px;
+}
+
+h2{
+  text-align: center;
 }
