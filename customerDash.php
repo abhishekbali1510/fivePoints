@@ -36,7 +36,7 @@
 
  <header>
     <a href="dash.php"><div>Back</div></a>
-    <a href="dash.php"><span>Generate bill</span></a>
+    <a href="generateBill.php"><span>Generate bill</span></a>
   </header>
 
     <!-- <br><br><br><br> -->

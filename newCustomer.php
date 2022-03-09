@@ -33,7 +33,7 @@
 <body>
 
   <header>
-    <a href="link.html"><span>New customer</span></a>
+    <a href="dash.php"><span>Back</span></a>
   </header>
 
     <br><br><br><br>
