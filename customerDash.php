@@ -43,7 +43,7 @@
     <div class= "customerInfo">
         <div>money left : 5000</div>
       
-        <div>membership vadivd : 14/10/2000</div>
+        <div>membership amount : 10000</div>
         
         <div>name : Rohan</div>
         
@@ -57,7 +57,6 @@
      <tr><th>Name</th><th>Email</th><th>Password</th></tr>
      </thead>
      <tbody>
-     <tr><td>Daniel Danny</td><td>danny.daniel@gmail.com</td><td>Pass1234</td></tr>
      <tr><td>Samuel</td><td>samuel@gmail.com</td><td>Pass1234</td></tr>
      <tr><td>Jack</td><td>jack@gmail.com</td><td>Pass1234</td></tr>
      <tr><td>Eureka</td><td>eureka@gmail.com</td><td>Pass1234</td></tr>
