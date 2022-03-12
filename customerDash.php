@@ -1,8 +1,11 @@
 <?php
+  require "conn.php";
   session_start();
   if($_SESSION['login']==true)
   {
-    
+        $sql = "SELECT * FROM customerDetails WHERE customerMobile='".$_SESSION["currentCustomer"]."'";
+        $result = $conn->query($sql);
+        $row = $result->fetch_assoc();
   }
   else
   {
@@ -41,13 +44,15 @@
 
     <!-- <br><br><br><br> -->
     <div class= "customerInfo">
-        <div>money left : 5000</div>
+      <?php
+        echo "<div>money left : ".$row["moneyLeft"]."</div>";
       
-        <div>membership amount : 10000</div>
+        echo "<div>membership amount : ".$row["membershipAmount"]."</div>";
         
-        <div>name : Rohan</div>
+        echo "<div>name : ".$row["customerName"]."</div>";
         
-        <div>mobile : 9654210264</div>
+        echo "<div>mobile : ".$row["customerMobile"]."</div>";
+        ?>
     </div>
     <br>
  <div class="container">

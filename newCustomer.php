@@ -18,7 +18,7 @@
         else
         {
           $_SESSION['error']= "";
-          $sql = "INSERT INTO `customerDetails` (`customerName`, `customerMobile`, `customerEmail`, `membershipAmount`) VALUES ('".$_POST["cusName"]."','".$_POST["cusPhone"]."', '".$_POST["cusEmail"]."', '".$_POST["membershipAmt"]."');";
+          $sql = "INSERT INTO `customerDetails` (`customerName`, `customerMobile`, `customerEmail`, `membershipAmount`,`moneyLeft`) VALUES ('".$_POST["cusName"]."','".$_POST["cusPhone"]."', '".$_POST["cusEmail"]."', '".$_POST["membershipAmt"]."','".$_POST["membershipAmt"]."');";
           $conn->query($sql);
           // pop up customer created
         }
