@@ -10,23 +10,43 @@
 		if(!empty($_POST["save"])) {
 			
 			$itemCount = count($_POST["item_name"]);
-			$itemValues=0;
-			$query = "INSERT INTO item (item_name,item_price) VALUES ";
-			$queryValue = "";
+			
 			for($i=0;$i<$itemCount;$i++) {
-				if(!empty($_POST["item_name"][$i]) || !empty($_POST["item_price"][$i])) {
-					$itemValues++;
-					if($queryValue!="") {
-						$queryValue .= ",";
-					}
-					$queryValue .= "('" . $_POST["item_name"][$i] . "', '" . $_POST["item_price"][$i] . "')";
+				if($i==0)
+				{
+					$allItems=$_POST["item_name"][$i];
 				}
+				else
+				{
+					$allItems=$allItems.",".$_POST["item_name"][$i];
+					
+				}
+				$totalPrice=$totalPrice + $_POST["item_price"][$i];
 			}
-			$sql = $query.$queryValue;
-			if($itemValues!=0) {
-				$result = mysqli_query($conn, $sql);
-				if(!empty($result)) $message = "Added Successfully.";
+			if($row["membershipAmount"]=="5000")
+			{
+				$discount=0.3*$totalPrice;
 			}
+			elseif($row["membershipAmount"]=="10000")
+			{
+				$discount=0.4*$totalPrice;
+			}
+			elseif($row["membershipAmount"]=="30000")
+			{
+				$discount=0.5*$totalPrice;
+			}
+			$paidAmount=$totalPrice-$discount;
+			$sql="INSERT INTO `customerHistory` (`customerName`, `items`, `totalPrice`, `discount`, `paidAmount`) VALUES ('".$row["customerName"]."', '".$allItems."','".$totalPrice."' , '".$discount."', '".$paidAmount."');";
+			$result = $conn->query($sql);
+
+			//money deduction
+			$moneyUpdate=$row["moneyLeft"]-$paidAmount;
+			$sql="UPDATE `customerDetails` SET `moneyLeft` = '".$moneyUpdate."' WHERE `customerDetails`.`customerMobile` = '".$_SESSION["currentCustomer"]."'";
+			$result = $conn->query($sql);
+
+			$sql = "SELECT * FROM customerDetails WHERE customerMobile='".$_SESSION["currentCustomer"]."'";
+        	$result = $conn->query($sql);
+        	$row = $result->fetch_assoc();
 		}
 	}
 	else
@@ -99,9 +119,12 @@ function deleteRow() {
 <input type="button" name="del_item" value="Delete" onClick="deleteRow();" />
 <br>
 <br>
-<h3>TOTAL : 5000</h3>
-<h3>Discount : 5000</h3>
-<h3>paid amount : 5000</h3>
+<?php
+echo "<h3>Items : ".$allItems."</h3>";
+echo "<h3>TOTAL : ".$totalPrice."</h3>";
+echo "<h3>Discount : ".$discount."</h3>";
+echo "<h3>paid amount : ".$paidAmount."</h3>";
+?>
 <span class="success"><?php if(isset($message)) { echo $message; }?></span>
 </DIV>
 <DIV class="footer">
