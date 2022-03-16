@@ -6,7 +6,7 @@
     if(isset($_POST['createCustomer']))
     {
       
-      if($_POST['cusPhone']!="" AND $_POST['membershipAmt']!="" AND $_POST['cusName']!="")
+      if($_POST['cusPhone']!="" AND $_POST['membershipAmt']!="" AND $_POST['cusName']!="" AND $_POST['cusEmail']!="")
       {
         $sql = "SELECT customerMobile FROM customerDetails WHERE customerMobile='".$_POST["cusPhone"]."'";
         $result = $conn->query($sql);

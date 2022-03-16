@@ -1,5 +1,6 @@
 <?php
 	require 'conn.php';
+	require 'mail.php';
 	session_start();
 	if($_SESSION['login']==true)
 	{
@@ -36,17 +37,33 @@
 				$discount=0.5*$totalPrice;
 			}
 			$paidAmount=$totalPrice-$discount;
-			$sql="INSERT INTO `customerHistory` (`customerName`, `items`, `totalPrice`, `discount`, `paidAmount`) VALUES ('".$row["customerName"]."', '".$allItems."','".$totalPrice."' , '".$discount."', '".$paidAmount."');";
-			$result = $conn->query($sql);
 
-			//money deduction
-			$moneyUpdate=$row["moneyLeft"]-$paidAmount;
-			$sql="UPDATE `customerDetails` SET `moneyLeft` = '".$moneyUpdate."' WHERE `customerDetails`.`customerMobile` = '".$_SESSION["currentCustomer"]."'";
-			$result = $conn->query($sql);
+			if($paidAmount>$row["moneyLeft"])
+			{
+				$_SESSION['error']="not sufficient balance";
+			}
+			else
+			{
+				$sql="INSERT INTO `customerHistory` (`customerName`, `items`, `totalPrice`, `discount`, `paidAmount`) VALUES ('".$row["customerName"]."', '".$allItems."','".$totalPrice."' , '".$discount."', '".$paidAmount."');";
+				$result = $conn->query($sql);
 
-			$sql = "SELECT * FROM customerDetails WHERE customerMobile='".$_SESSION["currentCustomer"]."'";
-        	$result = $conn->query($sql);
-        	$row = $result->fetch_assoc();
+				//money deduction
+				$moneyUpdate=$row["moneyLeft"]-$paidAmount;
+				$sql="UPDATE `customerDetails` SET `moneyLeft` = '".$moneyUpdate."' WHERE `customerDetails`.`customerMobile` = '".$_SESSION["currentCustomer"]."'";
+				$result = $conn->query($sql);
+
+				$sql = "SELECT * FROM customerDetails WHERE customerMobile='".$_SESSION["currentCustomer"]."'";
+				$result = $conn->query($sql);
+				$row = $result->fetch_assoc();
+				
+				//sending mail
+
+				$html='Msg';
+				echo smtp_mailer($row['customerEmail'],'subject',$html);
+			}
+			
+
+
 		}
 	}
 	else
@@ -124,6 +141,7 @@ echo "<h3>Items : ".$allItems."</h3>";
 echo "<h3>TOTAL : ".$totalPrice."</h3>";
 echo "<h3>Discount : ".$discount."</h3>";
 echo "<h3>paid amount : ".$paidAmount."</h3>";
+echo $_SESSION["error"];
 ?>
 <span class="success"><?php if(isset($message)) { echo $message; }?></span>
 </DIV>
