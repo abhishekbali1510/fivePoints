@@ -61,15 +61,15 @@
      <h2>History</h2>
      <table class="table table-fluid" id="myTable" >
      <thead>
-     <tr><th>Name</th><th>Items</th><th>Price</th><th>Discount</th><th>Total</th><th>Date & Time</th></tr>
+     <tr><th>Items</th><th>Price</th><th>Discount</th><th>Total</th><th>Date & Time</th></tr>
      </thead>
      <tbody>
        <?php
-       $sql = "SELECT * FROM customerHistory WHERE customerName='".$row["customerName"]."' ORDER BY `date` DESC" ;
+       $sql = "SELECT * FROM customerHistory WHERE customerMobile='".$row["customerMobile"]."' ORDER BY `date` DESC" ;
        $result = $conn->query($sql);
        if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-     echo "<tr><td>".$row["customerName"]."</td><td>".$row["items"]."</td><td>".$row["totalPrice"]."</td><td>".$row["discount"]."</td><td>".$row["paidAmount"]."</td><td>".$row["date"]."</td></tr>";
+     echo "<tr><td>".$row["items"]."</td><td>".$row["totalPrice"]."</td><td>".$row["discount"]."</td><td>".$row["paidAmount"]."</td><td>".$row["date"]."</td></tr>";
      
         }
       }

@@ -45,7 +45,7 @@
 			else
 			{
 				$_SESSION['error3']="";
-				$sql="INSERT INTO `customerHistory` (`customerName`, `items`, `totalPrice`, `discount`, `paidAmount`) VALUES ('".$row["customerName"]."', '".$allItems."','".$totalPrice."' , '".$discount."', '".$paidAmount."');";
+				$sql="INSERT INTO `customerHistory` (`customerMobile`, `items`, `totalPrice`, `discount`, `paidAmount`) VALUES ('".$row["customerMobile"]."', '".$allItems."','".$totalPrice."' , '".$discount."', '".$paidAmount."');";
 				$result = $conn->query($sql);
 
 				//money deduction
