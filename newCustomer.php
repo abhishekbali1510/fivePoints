@@ -33,19 +33,34 @@
         else
         {
           $_SESSION['error2']= "";
+
+              if($_POST['membershipAmt']=="5000")
+              {
+                $discount=20;
+              }
+              elseif($_POST['membershipAmt']=="10000")
+              {
+                $discount=30;
+              }
+              elseif($_POST['membershipAmt']=="30000")
+              {
+                $discount=40;
+              }
+
           $sql = "INSERT INTO `customerDetails` (`customerName`, `customerMobile`, `customerEmail`, `membershipAmount`, `customerCardNumber` ,`moneyLeft`) VALUES ('".$_POST["cusName"]."','".$_POST["cusPhone"]."', '".$_POST["cusEmail"]."', '".$_POST["membershipAmt"]."','".$_POST["cusCard"]."','".$_POST["membershipAmt"]."');";
           $conn->query($sql);
           $html="done";
-          $html="Hello ".$_POST['cusName']."
-          Congratulations  and welcome to Five Points Unisex Salon, thank you for being a valuable member! Please enjoy 20% OFF on all your services at Five Points Unisex Salon.Always Bring this card while visiting salon.
-          Terms and Conditions :
-          -You'll get 20% off on all your services
-          -This card can be used by 4 members including you
-          -If the membership amount is over, it is optional for you to renew it.
-          -In case your card is lost, immediately inform on 9773689916
-          If you have any questions or ever need help, feel free to email us at fivepointsE1@gmail.com or  call us at 9773689916.
-          Thanks and Regards
-          FIve Points Unisex Salon";
+          $html=nl2br("Hello ".$_POST['cusName']."\n
+          Congratulations  and welcome to Five Points Unisex Salon, thank you for being a valuable member! Please enjoy ".$discount."% OFF on all your services at Five Points Unisex Salon. \n
+          Your unique card number is ".$_POST['cusCard']." .Always Bring this card while visiting salon.\n
+          Terms and Conditions :\n
+          -You'll get ".$discount."% off on all your services\n
+          -This card can be used by 4 members including you\n
+          -If the membership amount is over, it is optional for you to renew it.\n
+          -In case your card is lost, immediately inform on 9773689916\n
+          If you have any questions or ever need help, feel free to email us at fivepointsE1@gmail.com or  call us at 9773689916.\n
+          Thanks and Regards\n
+          FIve Points Unisex Salon");
 
 				  echo smtp_mailer($_POST['cusEmail'],'FivePoints',$html);
           header("location: dash.php");

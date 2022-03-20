@@ -26,15 +26,15 @@
 			}
 			if($row["membershipAmount"]=="5000")
 			{
-				$discount=0.3*$totalPrice;
+				$discount=0.2*$totalPrice;
 			}
 			elseif($row["membershipAmount"]=="10000")
 			{
-				$discount=0.4*$totalPrice;
+				$discount=0.3*$totalPrice;
 			}
 			elseif($row["membershipAmount"]=="30000")
 			{
-				$discount=0.5*$totalPrice;
+				$discount=0.4*$totalPrice;
 			}
 			$paidAmount=$totalPrice-$discount;
 
