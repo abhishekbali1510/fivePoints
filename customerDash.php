@@ -20,7 +20,7 @@
  <head>
      <meta charset="utf-8" />
      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-     <title>Data Tables</title>
+     <title>Five points</title>
      <link rel="stylesheet" href="login.css" media="screen" type="text/css" />
      <meta name="viewport" content="width=device-width, initial-scale=1">
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -52,6 +52,8 @@
         echo "<div>name : ".$row["customerName"]."</div>";
         
         echo "<div>mobile : ".$row["customerMobile"]."</div>";
+
+        echo "<div>Email : ".$row["customerEmail"]."</div>";
         ?>
     </div>
     <br>

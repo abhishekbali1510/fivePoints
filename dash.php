@@ -11,7 +11,7 @@
       if($_POST['cusPhone']!="" )
       {
         
-        $_SESSION['error']= "";
+        $_SESSION['error1']= "";
         
         $sql = "SELECT customerMobile FROM customerDetails WHERE customerMobile='".$_POST["cusPhone"]."'";
         $result = $conn->query($sql);
@@ -26,13 +26,13 @@
         }
         else
         {
-          $_SESSION['error']= "Customer not registered";
+          $_SESSION['error1']= "Customer not registered";
         }
       }
       else
       {
         
-        $_SESSION['error']="Enter phone number";
+        $_SESSION['error1']="Enter phone number";
       }
     } 
   }
@@ -75,7 +75,7 @@
     <input type="text" name="cusPhone" placeholder="Mobile num">
     
     <input type="submit" name="getData" class="login login-submit" value="Submit">
-    <p><?php echo $_SESSION['error']?></p>
+    <p><?php echo $_SESSION['error1']?></p>
   </form>
 
   

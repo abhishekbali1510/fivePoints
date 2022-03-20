@@ -40,10 +40,11 @@
 
 			if($paidAmount>$row["moneyLeft"])
 			{
-				$_SESSION['error']="not sufficient balance";
+				$_SESSION['error3']="not sufficient balance";
 			}
 			else
 			{
+				$_SESSION['error3']="";
 				$sql="INSERT INTO `customerHistory` (`customerName`, `items`, `totalPrice`, `discount`, `paidAmount`) VALUES ('".$row["customerName"]."', '".$allItems."','".$totalPrice."' , '".$discount."', '".$paidAmount."');";
 				$result = $conn->query($sql);
 
@@ -57,8 +58,7 @@
 				$row = $result->fetch_assoc();
 				
 				//sending mail
-
-				$html='Msg';
+				$html='bill msg';
 				echo smtp_mailer($row['customerEmail'],'subject',$html);
 			}
 			
@@ -78,7 +78,7 @@
 
 <HTML>
 <HEAD>
-<TITLE>PHP jQuery Dynamic Textbox</TITLE>
+<TITLE>Five Points</TITLE>
 <LINK href="style.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="login.css">
 <SCRIPT src="http://code.jquery.com/jquery-2.1.1.js"></SCRIPT>
@@ -116,6 +116,8 @@ function deleteRow() {
         echo "<div>name : ".$row["customerName"]."</div>";
         
         echo "<div>mobile : ".$row["customerMobile"]."</div>";
+
+		echo "<div>Email : ".$row["customerEmail"]."</div>";
         ?>
     </div>
     <br><br><br>
@@ -141,7 +143,7 @@ echo "<h3>Items : ".$allItems."</h3>";
 echo "<h3>TOTAL : ".$totalPrice."</h3>";
 echo "<h3>Discount : ".$discount."</h3>";
 echo "<h3>paid amount : ".$paidAmount."</h3>";
-echo $_SESSION["error"];
+echo $_SESSION["error3"];
 ?>
 <span class="success"><?php if(isset($message)) { echo $message; }?></span>
 </DIV>
