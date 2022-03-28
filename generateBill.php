@@ -27,14 +27,17 @@
 			if($row["membershipAmount"]=="5000")
 			{
 				$discount=0.2*$totalPrice;
+				$discperc=20;
 			}
 			elseif($row["membershipAmount"]=="10000")
 			{
 				$discount=0.3*$totalPrice;
+				$discperc=30;
 			}
 			elseif($row["membershipAmount"]=="30000")
 			{
 				$discount=0.4*$totalPrice;
+				$discperc=40;
 			}
 			$paidAmount=$totalPrice-$discount;
 
@@ -58,7 +61,145 @@
 				$row = $result->fetch_assoc();
 				
 				//sending mail
-				$html='bill msg';
+				$html='<html>
+				<head>
+					<title>Five Points</title>
+					<style>
+			
+						table {
+						  font-family: arial, sans-serif;
+						  border-collapse: collapse;
+						  width: 100%;
+						}
+						td, th {
+						  border: 1px solid #dddddd;
+						  text-align: left;
+						  padding: 8px;
+						}
+						tr:nth-child(even) {
+						  background-color: #dddddd;
+						}
+						*{
+						  font-size: 15px;
+						}
+						
+						</style>
+				</head>
+				<body>
+				
+				
+			
+						<section style="display: flex; justify-content: space-between;">
+						  <section></section>
+			
+			
+			
+			
+						  <section style="border: 1px solid black; width: 100%; ">
+			
+							<h2 style="font-size: 30px; margin-left: 30px; text-decoration: underline 2px #dc143c;">Five<i style="font-size: 30px; color: #dc143c;">Points</i></h2>
+			
+							<div style="display: flex;">
+								<div style="width: 70%; height: 3vh; background: #dc143c;">
+			
+								</div>
+			
+								<div style="margin-top: -17px; margin-left: 10px; margin-right: 10px;">
+									<h2 style="font-size: 20px;">INVOICE</h2>
+								</div>
+							   
+							<div style="width: 30%; height: 3vh; background: #dc143c;">
+			
+							</div>
+						</div>
+			
+						<h3 style="margin-left: 30px; display: flex; justify-content: space-between;">
+							<b>Invoice To :</b>
+							<b style="margin-right: 50px;">Date : 26-mar-2022</b>
+			
+						</h3>
+						<p style="margin-left: 30px;">
+							Five Points Unisex Salon<br>
+							D2-01, Sector-E,Pocket-1,Vasant Kunj,<br> New Delhi-110070<br>
+							fivepointsE1@gmail.com
+						</p>
+			
+						<table>
+			
+							<tr>
+							  <th>S.No.</th>
+							  <th>Services</th>
+							  <th>Rate</th>
+							  <th>Discount</th>
+							  <th>Amount</th>
+			
+							</tr>';
+						for($i=0;$i<$itemCount;$i++)
+							{
+								$html=$html.' <tr>
+								<td>'.($i+1).'</td>
+								<td>'.$_POST["item_name"][$i].'</td>
+								<td>'.$_POST["item_price"][$i].'</td>
+								<td>'.$discperc.'%</td>
+								<td>'.($_POST["item_price"][$i]-$_POST["item_price"][$i]*$discperc/100).'</td>
+							  </tr>';
+							}
+						$html=$html.'<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>Sub Total : '.$totalPrice.'<br>Discount : '.$discperc.'%</td>
+					  </tr>
+	
+					  <tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td style="background: #dc143c; color: #fff;">Total : '.$paidAmount.'</td>
+					  </tr>
+	
+				  </table>
+	
+				  <div style="border: 1px solid #000; text-align: right; padding: 5px; padding-right: 30px;">
+					
+				  </div>
+	
+				  <h4 style="margin-left: 30px;">
+					  Thanks For Comming Five Points Unisex Salon
+				  </h4>
+				  <p style="margin-left: 30px;">
+					Declararion : <br>
+					decleat that this invoice shows the actual price of <br> the goods described and that all <br> particulars are true and correct
+				  </p>
+	
+	
+					<div style="display: flex;">
+					  <div style="width: 70%; height: 1vh; background: #dc143c;">
+	
+					  </div>
+	
+					  <div style="margin-top: -20px; margin-left: 10px; margin-right: 10px;">
+						  <p style="display: flex;"><span>Authorized </span> <span style="margin-left: 5px;"> Sign</span> </p>
+					  </div>
+					
+				  <div style="width: 30%; height: 1vh; background: #dc143c;">
+	
+				  </div>
+			  </div>
+	
+	
+				</section>
+	
+	
+	
+	
+				  <section></section>
+				</section>
+	
+		</body>
+	</html>';
 				echo smtp_mailer($row['customerEmail'],'subject',$html);
 			}
 			
@@ -118,6 +259,9 @@ function deleteRow() {
         echo "<div>mobile : ".$row["customerMobile"]."</div>";
 
 		echo "<div>Email : ".$row["customerEmail"]."</div>";
+
+		echo "<div>Card Number : ".$row["customerCardNumber"]."</div>";
+
         ?>
     </div>
     <br><br><br>

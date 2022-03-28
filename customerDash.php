@@ -1,5 +1,5 @@
 <?php
-  require "conn.php";
+  require "conn.php"; 
   session_start();
   if($_SESSION['login']==true)
   {
@@ -40,6 +40,10 @@
  <header>
     <a href="dash.php"><div>Back</div></a>
     <a href="generateBill.php"><span>Generate bill</span></a>
+    <br>
+    <a href="renew.php"><span>Renew </span></a>
+    <br>
+    <a href="replaceCard.php"><span>Replace Card </span></a>
   </header>
 
     <!-- <br><br><br><br> -->
@@ -54,6 +58,8 @@
         echo "<div>mobile : ".$row["customerMobile"]."</div>";
 
         echo "<div>Email : ".$row["customerEmail"]."</div>";
+
+        echo "<div>Card Number : ".$row["customerCardNumber"]."</div>";
         ?>
     </div>
     <br>
