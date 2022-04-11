@@ -109,14 +109,14 @@
 								</div>
 							   
 							<div style="width: 30%; height: 3vh; background: #dc143c;">
-			
+							
 							</div>
 						</div>
-			
+						<b style="margin-right: 50px;margin-left: 30px;">Invoice for :'.$row["customerName"].' </b>
 						<h3 style="margin-left: 30px; display: flex; justify-content: space-between;">
-							<b>Invoice To :</b>
-							<b style="margin-right: 50px;">Date : 26-mar-2022</b>
-			
+						
+							<b style="margin-right: 50px;">Date :'.date("jS F Y ").' </b>
+							
 						</h3>
 						<p style="margin-left: 30px;">
 							Five Points Unisex Salon<br>
@@ -159,7 +159,13 @@
 						<td></td>
 						<td style="background: #dc143c; color: #fff;">Total : '.$paidAmount.'</td>
 					  </tr>
-	
+					  <tr>
+					  <td></td>
+					  <td></td>
+					  <td></td>
+					  <td></td>
+					  <td style="background: #dc143c; color: #fff;">Membership Amount Left : '.$row["moneyLeft"].'</td>
+					</tr>
 				  </table>
 	
 				  <div style="border: 1px solid #000; text-align: right; padding: 5px; padding-right: 30px;">
@@ -167,11 +173,11 @@
 				  </div>
 	
 				  <h4 style="margin-left: 30px;">
-					  Thanks For Comming Five Points Unisex Salon
+				  Thanks For Visiting Five Points Unisex Salon
 				  </h4>
 				  <p style="margin-left: 30px;">
 					Declararion : <br>
-					decleat that this invoice shows the actual price of <br> the goods described and that all <br> particulars are true and correct
+					This declares that this invoice shows the actual price of the goods described and that all particulars are true and correct
 				  </p>
 	
 	
@@ -180,9 +186,7 @@
 	
 					  </div>
 	
-					  <div style="margin-top: -20px; margin-left: 10px; margin-right: 10px;">
-						  <p style="display: flex;"><span>Authorized </span> <span style="margin-left: 5px;"> Sign</span> </p>
-					  </div>
+					  
 					
 				  <div style="width: 30%; height: 1vh; background: #dc143c;">
 	
